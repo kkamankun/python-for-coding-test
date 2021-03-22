@@ -12,3 +12,11 @@ for i in range(0, n):
     break
 
 # 책 코드
+n = int(input())
+input_data = list(map(int, input().split()))
+input_data.sort()
+target = 1
+for i in input_data:
+  if target >= i:
+    target += i
+print(target)
