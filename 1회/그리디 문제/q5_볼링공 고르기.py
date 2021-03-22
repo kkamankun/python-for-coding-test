@@ -1,4 +1,4 @@
-# 내 풀이
+# 나의 코드
 import itertools
 
 n, m = map(int, input().split())
