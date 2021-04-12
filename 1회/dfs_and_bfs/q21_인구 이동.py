@@ -1,10 +1,10 @@
-import copy
+import sys
 from collections import deque
 
-n, l, r = map(int, input().split())
+n, l, r = map(int, sys.stdin.readline().rstrip().split())
 ground = []
 for _ in range(n):
-    ground.append(list(map(int, input().split())))
+    ground.append(list(map(int, sys.stdin.readline().rstrip().split())))
 
 # 이동할 네 방향 정의(상, 하, 좌, 우)
 dx = [-1, 1, 0, 0]
@@ -17,7 +17,7 @@ def bfs(x, y):
     queue = deque()
     queue.append((x, y))
     visited[x][y] = 1
-    union = [(x, y)]
+    sector = [(x, y)]
     while queue:
         x, y = queue.popleft()
         for i in range(4):
@@ -27,13 +27,9 @@ def bfs(x, y):
                 if visited[nx][ny] == 0 and l <= abs(ground[nx][ny] - ground[x][y]) <= r:
                     queue.append((nx, ny))
                     visited[nx][ny] = 1
-                    union.append((nx, ny))
-    population = 0
-    if len(union):
-        for k in range(len(union)):
-            population += ground[union[k][0]][union[k][1]]
-        for k in range(len(union)):
-            ground[union[k][0]][union[k][1]] = population // len(union)
+                    sector.append((nx, ny))
+    union.append(sector)
+    # print(union)
     return
 
 
@@ -41,13 +37,20 @@ answer = 0
 while True:
     visited = [[0] * n for _ in range(n)]  # 방문 여부 기록
     union = []
-    ground_prev = copy.deepcopy(ground)
     for i in range(n):
         for j in range(n):
             if not visited[i][j]:
                 bfs(i, j)
-    if ground == ground_prev:
+
+    if len(union) == n * n:
         break
+
+    for sec in union:
+        population = 0
+        for k in range(len(sec)):
+            population += ground[sec[k][0]][sec[k][1]]
+        for k in range(len(sec)):
+            ground[sec[k][0]][sec[k][1]] = population // len(sec)
     answer += 1
 
 print(answer)
