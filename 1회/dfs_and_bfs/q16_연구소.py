@@ -125,7 +125,7 @@ def dfs(count):
                 if temp[i][j] == 2:
                     virus(i, j)
         # 안전 영역의 최댓값 계산
-        result = max(result,get_score())
+        result = max(result, get_score())
         return
     # 빈 공간에 울타리 설치
     for i in range(n):
