@@ -1,4 +1,4 @@
-# 나의 풀이
+""" 나의 풀이 """
 import sys
 
 n = int(sys.stdin.readline().rstrip())
@@ -11,7 +11,7 @@ for i in input_data:
         break
 print(i)
 
-# 책의 풀이
+""" 책의 풀이 """
 n = int(input())
 data = list(map(int, input().split()))
 data.sort()
