@@ -10,3 +10,11 @@ for i in input_data:
     if cnt >= n // 2:
         break
 print(i)
+
+# 책의 풀이
+n = int(input())
+data = list(map(int, input().split()))
+data.sort()
+
+# 중간값(median)을 출력
+print(data[(n - 1) // 2])
