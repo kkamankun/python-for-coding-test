@@ -22,14 +22,6 @@ answer = 0
 result = []
 
 
-def pprint(temp):
-    for i in range(4):
-        for j in range(4):
-            print(str(temp[i][j]).rjust(3), end=' ')
-        print()
-    print()
-
-
 def shark_possible_move(board, direction, x, y):
     position = []
     shark_dir = direction[x][y]  # 상어 방향
