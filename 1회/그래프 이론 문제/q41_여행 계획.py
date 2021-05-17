@@ -46,3 +46,43 @@ for i in range(m - 1):
         answer = "NO"
         break
 print(answer)
+
+# 답지 풀이
+import sys
+input = sys.stdin.readline
+
+n, m = map(int, input().split())  # n: 여행지의 수, m: 여행 계획에 속한 도시의 수
+parent = [i for i in range(n + 1)]
+
+
+def find_parent(parent, x):
+    if parent[x] != x:
+        parent[x] = find_parent(parent, parent[x])
+    return parent[x]
+
+
+def union_parent(parent, a, b):
+    a = find_parent(parent, a)
+    b = find_parent(parent, b)
+    if a < b:
+        parent[b] = a
+    else:
+        parent[a] = b
+
+
+for i in range(n):
+    connected = list(map(int, input().split()))
+    for j in range(n):
+        print(i, j)
+        if connected[j] == 1:
+            union_parent(parent, i + 1, j + 1)
+
+# 여행 계획에 포함된 여행지의 번호들
+plan = list(map(int, input().split()))
+
+answer = "YES"
+for i in range(m - 1):
+    if find_parent(parent, plan[i]) != find_parent(parent, plan[i + 1]):
+        answer = "NO"
+        break
+print(answer)
